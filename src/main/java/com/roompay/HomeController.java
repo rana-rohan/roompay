@@ -1,5 +1,8 @@
 package com.roompay;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,30 +25,36 @@ public class HomeController {
 
             case "rohan":
                 upi = "rohan76991709631@ybl";
-                person = "Rohan";
+                person = "Rohan Rana";
                 break;
 
             case "partha":
                 upi = "8695379031@kotak811";
-                person = "Partha";
+                person = "Partha Saha";
                 break;
 
             case "prince":
-                upi = "princepanda7029-1@okhdfcbank";
-                person = "Prince";
+                upi = "YOUR_REAL_PRINCE_UPI";
+                person = "Prince Panda";
                 break;
 
             case "bibek":
-                upi = "bibeksharma@apl";
-                person = "Bibek";
+                upi = "sharmasbibek0@okhdfcbank";
+                person = "Bibek Sharma";
                 break;
 
             case "bhaskar":
                 upi = "broy98451@okaxis";
-                person = "Bhaskar";
+                person = "Bhaskar Roy";
                 break;
         }
 
-        return "redirect:upi://pay?pa=" + upi + "&pn=" + person;
+        String url =
+                "upi://pay?pa=" + upi +
+                        "&pn=" + URLEncoder.encode(person, StandardCharsets.UTF_8) +
+                        "&am=10.00" +
+                        "&cu=INR";
+
+        return "redirect:" + url;
     }
 }
